@@ -1,0 +1,63 @@
+# Site Configuration
+title: Aayam Sharma Neupane - Developer Portfolio
+email: aayam.neupane1@gmail.com
+description: >-
+  Full Stack Developer crafting elegant solutions to complex problems.
+  Passionate about clean code, innovative design, and automating manual tasks.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://github.com/hckeer" # your GitHub Pages URL
+
+# Personal Information
+author:
+  name: Aayam Sharma Neupane
+  title: Full Stack Developer
+  tagline: Building the future, one line of code at a time
+  bio: >-
+    Passionate developer with expertise in modern web technologies.
+    I love turning complex problems into simple, beautiful, and intuitive solutions.
+  location: Kathmandu, Nepal
+
+# Social Links
+social:
+  github: hckeer
+  linkedin: aayam-sharma-neupane-6a1b052a6
+  twitter: TechAayam92580
+  email: aayam.neupane1@gmail.com
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
+# Collections
+collections:
+  projects:
+    output: false
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Performance
+sass:
+  style: compressed
+
+# SEO
+lang: en
