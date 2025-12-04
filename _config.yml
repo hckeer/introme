@@ -4,8 +4,8 @@ email: aayam.neupane1@gmail.com
 description: >-
   Full Stack Developer crafting elegant solutions to complex problems.
   Passionate about clean code, innovative design, and automating manual tasks.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://github.com/hckeer" # your GitHub Pages URL
+baseurl: "/introme" # the subpath of your site, e.g. /blog
+url: "https://hckeer.github.io" # your GitHub Pages URL
 
 # Personal Information
 author:
