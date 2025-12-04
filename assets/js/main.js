@@ -180,8 +180,8 @@
     });
   }
 
-  /* ===== ANIMATED SKILL BARS ===== */
-  const skillBars = select('.skill-progress', true);
+  /* ===== ANIMATED TIMELINE PROGRESS BARS ===== */
+  const progressBars = select('.progress-bar', true);
   let skillsAnimated = false;
 
   function animateSkills() {
@@ -195,9 +195,9 @@
     const scrollPosition = window.scrollY + window.innerHeight;
 
     if (scrollPosition > skillsSectionTop && window.scrollY < skillsSectionTop + skillsSectionHeight) {
-      skillBars.forEach(bar => {
+      progressBars.forEach(bar => {
         const progress = bar.getAttribute('data-progress');
-        bar.style.width = progress + '%';
+        bar.style.setProperty('--progress', progress + '%');
       });
       skillsAnimated = true;
     }
