@@ -527,11 +527,11 @@
   updateScrollProgress();
 
   /* ===== PARALLAX SCROLLING ===== */
-  const parallaxElements = document.querySelectorAll('.hero-image, .about-image, .section-header');
-  
+  const parallaxElements = document.querySelectorAll('.hero-image, .about-image');
+
   function parallaxScroll() {
     const scrolled = window.pageYOffset;
-    
+
     parallaxElements.forEach((element, index) => {
       const speed = (index + 1) * 0.05; // Different speeds for different elements
       const yPos = -(scrolled * speed);
