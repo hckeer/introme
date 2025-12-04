@@ -226,97 +226,97 @@
     setTimeout(typeWriter, 1000);
   }
 
-  /* ===== PARTICLES.JS CONFIGURATION ===== */
-  if (typeof particlesJS !== 'undefined') {
-    particlesJS('particles-js', {
-      particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            value_area: 800
-          }
-        },
-        color: {
-          value: '#6366f1'
-        },
-        shape: {
-          type: 'circle',
-          stroke: {
-            width: 0,
-            color: '#000000'
-          }
-        },
-        opacity: {
-          value: 0.3,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 1,
-            opacity_min: 0.1,
-            sync: false
-          }
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 2,
-            size_min: 0.1,
-            sync: false
-          }
-        },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#6366f1',
-          opacity: 0.2,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: 'none',
-          random: false,
-          straight: false,
-          out_mode: 'out',
-          bounce: false,
-          attract: {
-            enable: false,
-            rotateX: 600,
-            rotateY: 1200
-          }
-        }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: {
-          onhover: {
-            enable: true,
-            mode: 'grab'
-          },
-          onclick: {
-            enable: true,
-            mode: 'push'
-          },
-          resize: true
-        },
-        modes: {
-          grab: {
-            distance: 140,
-            line_linked: {
-              opacity: 0.5
-            }
-          },
-          push: {
-            particles_nb: 4
-          }
-        }
-      },
-      retina_detect: true
+  /* ===== VANTA.JS 3D BACKGROUND ===== */
+  if (typeof VANTA !== 'undefined') {
+    VANTA.NET({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x6366f1,
+      backgroundColor: 0x0f172a,
+      points: 10.00,
+      maxDistance: 25.00,
+      spacing: 18.00
     });
   }
+
+  /* ===== CUSTOM ANIMATED CURSOR ===== */
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+
+  const cursorDot = document.createElement('div');
+  cursorDot.className = 'custom-cursor-dot';
+  document.body.appendChild(cursorDot);
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let cursorX = 0;
+  let cursorY = 0;
+  let dotX = 0;
+  let dotY = 0;
+
+  // Track mouse position
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // Smooth cursor follow animation
+  function animateCursor() {
+    // Smooth following with easing
+    cursorX += (mouseX - cursorX) * 0.1;
+    cursorY += (mouseY - cursorY) * 0.1;
+    dotX += (mouseX - dotX) * 0.2;
+    dotY += (mouseY - dotY) * 0.2;
+
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    cursorDot.style.left = dotX + 'px';
+    cursorDot.style.top = dotY + 'px';
+
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Add hover effect on interactive elements
+  const hoverElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .nav-link');
+  hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('cursor-hover');
+      cursorDot.classList.add('cursor-hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('cursor-hover');
+      cursorDot.classList.remove('cursor-hover');
+    });
+  });
+
+  /* ===== MAGNETIC BUTTONS ===== */
+  const magneticButtons = document.querySelectorAll('.btn, .social-icon, .project-link, .back-to-top');
+
+  magneticButtons.forEach(button => {
+    button.addEventListener('mousemove', function(e) {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      // Magnetic pull effect (max 15px)
+      const moveX = x * 0.3;
+      const moveY = y * 0.3;
+
+      button.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+    });
+
+    button.addEventListener('mouseleave', function() {
+      button.style.transform = 'translate(0, 0) scale(1)';
+    });
+  });
 
   /* ===== AOS (ANIMATE ON SCROLL) INITIALIZATION ===== */
   if (typeof AOS !== 'undefined') {
@@ -509,3 +509,122 @@
   console.log('%c💼 Check out my projects and feel free to reach out!', 'color: #14b8a6; font-size: 14px;');
 
 })();
+
+  /* ===== SCROLL PROGRESS BAR ===== */
+  const scrollProgress = document.getElementById('scrollProgress');
+
+  function updateScrollProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
+    
+    if (scrollProgress) {
+      scrollProgress.style.width = scrollPercent + '%';
+    }
+  }
+
+  window.addEventListener('scroll', updateScrollProgress);
+  updateScrollProgress();
+
+  /* ===== PARALLAX SCROLLING ===== */
+  const parallaxElements = document.querySelectorAll('.hero-image, .about-image, .section-header');
+  
+  function parallaxScroll() {
+    const scrolled = window.pageYOffset;
+    
+    parallaxElements.forEach((element, index) => {
+      const speed = (index + 1) * 0.05; // Different speeds for different elements
+      const yPos = -(scrolled * speed);
+      element.style.transform = `translateY(${yPos}px)`;
+    });
+  }
+
+  window.addEventListener('scroll', parallaxScroll);
+
+  /* ===== UI SOUNDS ===== */
+  let soundEnabled = localStorage.getItem('soundEnabled') !== 'false'; // Default: true
+  const soundToggle = document.getElementById('soundToggle');
+
+  // Create audio context for UI sounds
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  let audioContext;
+
+  function initAudioContext() {
+    if (!audioContext) {
+      audioContext = new AudioContext();
+    }
+  }
+
+  // Play UI sound
+  function playSound(frequency = 800, duration = 50, type = 'sine') {
+    if (!soundEnabled || !audioContext) return;
+    
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = frequency;
+    oscillator.type = type;
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + duration / 1000);
+  }
+
+  // Update sound toggle UI
+  function updateSoundToggle() {
+    if (soundToggle) {
+      const icon = soundToggle.querySelector('i');
+      if (soundEnabled) {
+        icon.className = 'fas fa-volume-up';
+        soundToggle.classList.remove('muted');
+      } else {
+        icon.className = 'fas fa-volume-mute';
+        soundToggle.classList.add('muted');
+      }
+    }
+  }
+
+  // Sound toggle button
+  if (soundToggle) {
+    updateSoundToggle();
+    
+    soundToggle.addEventListener('click', () => {
+      initAudioContext();
+      soundEnabled = !soundEnabled;
+      localStorage.setItem('soundEnabled', soundEnabled);
+      updateSoundToggle();
+      
+      // Play confirmation sound
+      if (soundEnabled) {
+        playSound(600, 100);
+        setTimeout(() => playSound(800, 100), 100);
+      }
+    });
+  }
+
+  // Add sounds to interactive elements
+  document.addEventListener('click', (e) => {
+    initAudioContext();
+    
+    if (e.target.closest('.btn, .nav-link')) {
+      playSound(800, 50);
+    } else if (e.target.closest('.social-icon, .project-link')) {
+      playSound(1000, 40);
+    } else if (e.target.closest('.theme-toggle')) {
+      playSound(600, 60, 'triangle');
+    }
+  });
+
+  // Hover sounds
+  document.querySelectorAll('.btn, .project-card, .skill-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      initAudioContext();
+      playSound(400, 30);
+    });
+  });
+
